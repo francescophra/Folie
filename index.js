@@ -10,6 +10,7 @@ const DEFAULTS = {
   shortcut: "ctrl+g",
   showOnStart: true,
   toggleButton: false,
+  mode: "fill",
 };
 
 export class Folie {
@@ -31,7 +32,9 @@ export class Folie {
       resolvedBreakpoints = DEFAULTS.breakpoints;
     }
 
-    this._options = {...DEFAULTS, ...rest, breakpoints: resolvedBreakpoints};
+    const mode = rest.mode ?? 'fill';
+    const opacity = rest.opacity ?? (mode === 'outline' ? 0.5 : DEFAULTS.opacity);
+    this._options = {...DEFAULTS, ...rest, breakpoints: resolvedBreakpoints, mode, opacity};
     this._shortcut = this._parseShortcut(this._options.shortcut);
     this._wrapper = null;
     this._styleEl = null;
@@ -90,12 +93,13 @@ export class Folie {
     this._wrapper.className = "fl-wrapper";
     this._wrapper.setAttribute("aria-hidden", "true");
     this._wrapper.style.zIndex = String(this._options.zIndex);
+    if (this._options.mode === 'outline') this._wrapper.dataset.flMode = 'outline';
     container.appendChild(this._wrapper);
   }
 
   _injectStyles() {
     this._styleEl = document.createElement("style");
-    this._styleEl.textContent = [".fl-wrapper {", "  position: fixed;", "  inset: 0;", "  pointer-events: none;", "  display: grid;", "  grid-template-columns: repeat(var(--fl-columns), 1fr);", "  gap: var(--fl-gutter);", "  padding: 0 var(--fl-margin);", "}", ".fl-col {", "  height: 100%;", "  background: var(--fl-color);", "  opacity: var(--fl-opacity);", "}", ".fl-toggle {", "  position: fixed;", "  bottom: 0px;", "  left: 0px;", "  width: 40px;", "  height: 40px;", "  background: var(--fl-color);", "  opacity: 0.5;", "  border: none;", "  cursor: pointer;", "  padding: 0;", `  z-index: ${this._options.zIndex};`, "}"].join("\n");
+    this._styleEl.textContent = [".fl-wrapper {", "  position: fixed;", "  inset: 0;", "  pointer-events: none;", "  display: grid;", "  grid-template-columns: repeat(var(--fl-columns), 1fr);", "  gap: var(--fl-gutter);", "  padding: 0 var(--fl-margin);", "}", ".fl-col {", "  height: 100%;", "  background: var(--fl-color);", "  opacity: var(--fl-opacity);", "}", ".fl-toggle {", "  position: fixed;", "  bottom: 0px;", "  left: 0px;", "  width: 40px;", "  height: 40px;", "  background: var(--fl-color);", "  opacity: 0.5;", "  border: none;", "  cursor: pointer;", "  padding: 0;", `  z-index: ${this._options.zIndex};`, "}", ".fl-wrapper[data-fl-mode=\"outline\"] .fl-col {", "  background: transparent;", "  box-shadow: inset 1px 0 0 0 var(--fl-color), inset -1px 0 0 0 var(--fl-color);", "}"].join("\n");
     document.head.appendChild(this._styleEl);
   }
 

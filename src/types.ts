@@ -16,4 +16,5 @@ export interface FolieOptions {
   shortcut?: string
   showOnStart?: boolean
   toggleButton?: boolean
+  mode?: 'fill' | 'outline'
 }

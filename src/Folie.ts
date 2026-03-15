@@ -19,6 +19,7 @@ const DEFAULTS = {
   shortcut: 'ctrl+g',
   showOnStart: true,
   toggleButton: false,
+  mode: 'fill' as const,
 }
 
 interface ResolvedOptions {
@@ -29,6 +30,7 @@ interface ResolvedOptions {
   shortcut: string
   showOnStart: boolean
   toggleButton: boolean
+  mode: 'fill' | 'outline'
 }
 
 export class Folie {
@@ -59,7 +61,9 @@ export class Folie {
       resolvedBreakpoints = DEFAULTS.breakpoints
     }
 
-    this.options = {...DEFAULTS, ...rest, breakpoints: resolvedBreakpoints}
+    const mode = rest.mode ?? 'fill'
+    const opacity = rest.opacity ?? (mode === 'outline' ? 0.5 : DEFAULTS.opacity)
+    this.options = {...DEFAULTS, ...rest, breakpoints: resolvedBreakpoints, mode, opacity}
     this.shortcut = this.parseShortcut(this.options.shortcut)
   }
 
@@ -112,6 +116,7 @@ export class Folie {
     this.wrapper.className = 'fl-wrapper'
     this.wrapper.setAttribute('aria-hidden', 'true')
     this.wrapper.style.zIndex = String(this.options.zIndex)
+    if (this.options.mode === 'outline') this.wrapper.dataset.flMode = 'outline'
     container.appendChild(this.wrapper)
   }
 
@@ -144,6 +149,10 @@ export class Folie {
       '  cursor: pointer;',
       '  padding: 0;',
       `  z-index: ${this.options.zIndex};`,
+      '}',
+      '.fl-wrapper[data-fl-mode="outline"] .fl-col {',
+      '  background: transparent;',
+      '  box-shadow: inset 1px 0 0 0 var(--fl-color), inset -1px 0 0 0 var(--fl-color);',
       '}',
     ].join('\n')
     document.head.appendChild(this.styleEl)

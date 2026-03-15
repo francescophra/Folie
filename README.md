@@ -72,6 +72,7 @@ new Folie({
 | `opacity`      | `number`  | `0.1`        | Column opacity                                                                    |
 | `zIndex`       | `number`  | `2147483647` | z-index of the overlay                                                            |
 | `shortcut`     | `string`  | `ctrl+g`     | Keyboard shortcut to toggle visibility                                            |
+| `mode`         | `'fill' \| 'outline'` | `'fill'` | `'outline'` renders columns as inset box-shadow borders instead of filled rectangles. When `mode` is `'outline'` and `opacity` is not set, opacity defaults to `0.5` |
 
 ## Breakpoint config
 

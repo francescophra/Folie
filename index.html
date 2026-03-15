@@ -101,6 +101,18 @@
         opacity: 0.4;
       }
 
+      .modes {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        margin-bottom: 24px;
+      }
+
+      .modes button {
+        flex: 1;
+        justify-content: center;
+      }
+
       footer {
         display: flex;
         gap: 12px;
@@ -146,6 +158,15 @@
         </button>
       </div>
 
+      <div class="modes">
+        <button class="active" data-mode="fill">
+          <span class="btn-name">Fill</span>
+        </button>
+        <button data-mode="outline">
+          <span class="btn-name">Outline</span>
+        </button>
+      </div>
+
       <footer>
         <span>©2026</span>
         <span>•</span>
@@ -159,6 +180,7 @@
       const root = document.documentElement.style;
       let instance;
       let currentCols = 6;
+      let currentMode = "fill";
 
       // Keep span/cols = 1/6 at all breakpoints so card width stays constant.
       // desktop: cols/6 — tablet: cols/3 — mobile: cols*2/3
@@ -175,7 +197,7 @@
       function build(cols, gutter) {
         currentCols = +cols;
         instance?.destroy();
-        instance = new Folie({columns: currentCols, gutter, margin: "20px", toggleButton: true}).mount();
+        instance = new Folie({columns: currentCols, gutter, margin: "20px", toggleButton: true, mode: currentMode}).mount();
         root.setProperty("--fl-columns", cols);
         root.setProperty("--fl-gutter", gutter);
         updateSpan();
@@ -187,9 +209,19 @@
 
       document.querySelectorAll(".presets button").forEach((btn) => {
         btn.addEventListener("click", () => {
-          document.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
+          document.querySelectorAll(".presets button").forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
           build(btn.dataset.cols, btn.dataset.gutter);
+        });
+      });
+
+      document.querySelectorAll(".modes button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".modes button").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentMode = btn.dataset.mode;
+          const activePreset = document.querySelector(".presets button.active");
+          build(activePreset.dataset.cols, activePreset.dataset.gutter);
         });
       });
     </script>

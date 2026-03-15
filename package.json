@@ -1,6 +1,6 @@
 {
   "name": "folie-grid",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Figma layout grid overlay for the browser — zero-dependency, framework agnostic",
   "type": "module",
   "main": "./index.js",
