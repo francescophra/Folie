@@ -21,7 +21,7 @@
       body {
         font-family: "SF Mono", "Fira Code", monospace;
         font-size: 10px;
-        background: #979797;
+        background: #bababa;
         color: #111;
         min-height: 100dvh;
       }
@@ -197,7 +197,7 @@
       function build(cols, gutter) {
         currentCols = +cols;
         instance?.destroy();
-        instance = new Folie({columns: currentCols, gutter, margin: "20px", toggleButton: true, mode: currentMode}).mount();
+        instance = new Folie({columns: currentCols, gutter, margin: "20px", toggleButton: true, mode: currentMode, color: "#0051FF"}).mount();
         root.setProperty("--fl-columns", cols);
         root.setProperty("--fl-gutter", gutter);
         updateSpan();
