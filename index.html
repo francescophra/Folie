@@ -166,7 +166,7 @@
       function build(cols, gutter) {
         currentCols = +cols;
         instance?.destroy();
-        instance = new Folie({columns: currentCols, gutter, margin: "20px"}).mount();
+        instance = new Folie({columns: currentCols, gutter, margin: "20px", toggleButton: true}).mount();
         root.setProperty("--fl-columns", cols);
         root.setProperty("--fl-gutter", gutter);
         updateSpan();
