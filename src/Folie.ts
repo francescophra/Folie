@@ -33,7 +33,7 @@ interface ResolvedOptions {
   mode: 'fill' | 'outline'
 }
 
-export class Folie {
+class Folie {
   private options: ResolvedOptions
   private wrapper: HTMLElement | null = null
   private styleEl: HTMLStyleElement | null = null

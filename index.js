@@ -13,7 +13,7 @@ const DEFAULTS = {
   mode: "fill",
 };
 
-export class Folie {
+class Folie {
   constructor(options = {}) {
     const {columns, gutter, margin, breakpoints, ...rest} = options;
 
