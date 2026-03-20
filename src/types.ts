@@ -1,14 +1,14 @@
 export interface BreakpointConfig {
   columns: number
-  gutter: CSSUnit
-  margin: CSSUnit
+  gutter: Spacer
+  margin: Spacer
   until?: number
 }
 
 export interface FolieOptions {
   columns?: number
-  gutter?: CSSUnit
-  margin?: CSSUnit
+  gutter?: Spacer
+  margin?:  Spacer
   breakpoints?: Record<string, BreakpointConfig>
   color?: Color
   opacity?: Opacity
@@ -18,6 +18,8 @@ export interface FolieOptions {
   toggleButton?: boolean
   mode?: 'fill' | 'outline'
 }
+
+type Spacer = CSSUnit | CustomProperty | Var
 
 type CSSUnit =
   | `${number}px` | `${number}pt` | `${number}pc`
