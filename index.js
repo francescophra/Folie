@@ -15,7 +15,7 @@ const DEFAULTS = {
 
 class Folie {
   constructor(options = {}) {
-    const {columns, gutter, margin, row, rowGutter, rowMargin, rowColor, rowOpacity, breakpoints, ...rest} = options;
+    const {columns, gutter, margin, rows, rowGutter, rowMargin, rowColor, rowOpacity, breakpoints, ...rest} = options;
 
     const hasShorthand = columns !== undefined || gutter !== undefined || margin !== undefined;
     const hasBreakpoints = breakpoints !== undefined && Object.keys(breakpoints).length > 0;
@@ -50,7 +50,7 @@ class Folie {
       resolvedBreakpoints = breakpoints;
     }
 
-    if (row !== undefined) resolvedBase.row = row;
+    if (rows !== undefined) resolvedBase.rows = rows;
     if (rowGutter !== undefined) resolvedBase.rowGutter = rowGutter;
     if (rowMargin !== undefined) resolvedBase.rowMargin = rowMargin;
 
@@ -130,7 +130,7 @@ class Folie {
     if (this._options.mode === 'outline') this._wrapper.dataset.flMode = 'outline';
     container.appendChild(this._wrapper);
 
-    if (this._options.base.row !== undefined) {
+    if (this._options.base.rows !== undefined) {
       this._rowWrapper = document.createElement("div");
       this._rowWrapper.className = "fl-row-wrapper";
       this._rowWrapper.setAttribute("aria-hidden", "true");
@@ -218,17 +218,17 @@ class Folie {
       this._wrapper.replaceChildren(frag);
     }
 
-    if (this._rowWrapper && cfg.row !== undefined) {
+    if (this._rowWrapper && cfg.rows !== undefined) {
       const rs = this._rowWrapper.style;
-      rs.setProperty("--fl-rows", String(cfg.row));
+      rs.setProperty("--fl-rows", String(cfg.rows));
       rs.setProperty("--fl-row-gutter", cfg.rowGutter);
       rs.setProperty("--fl-row-margin", cfg.rowMargin);
       rs.setProperty("--fl-row-color", this._options.rowColor);
       rs.setProperty("--fl-row-opacity", String(this._options.rowOpacity));
 
-      if (this._rowWrapper.childElementCount !== cfg.row) {
+      if (this._rowWrapper.childElementCount !== cfg.rows) {
         const frag = document.createDocumentFragment();
-        for (let i = 0; i < cfg.row; i++) {
+        for (let i = 0; i < cfg.rows; i++) {
           const row = document.createElement("div");
           row.className = "fl-row";
           frag.appendChild(row);

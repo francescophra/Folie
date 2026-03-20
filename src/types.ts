@@ -2,7 +2,7 @@ export interface BreakpointConfig {
   columns?: number
   gutter?: Spacer
   margin?: Spacer
-  row?: number
+  rows?: number
   rowGutter?: Spacer
   rowMargin?: Spacer
 }
@@ -11,7 +11,7 @@ export interface FolieOptions {
   columns?: number
   gutter?: Spacer
   margin?:  Spacer
-  row?: number
+  rows?: number
   rowGutter?: Spacer
   rowMargin?: Spacer
   rowColor?: Color
