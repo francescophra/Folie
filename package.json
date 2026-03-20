@@ -1,7 +1,7 @@
 {
   "name": "folie-grid",
   "version": "0.1.3",
-  "description": "Figma layout grid overlay for the browser — zero-dependency, framework agnostic",
+  "description": "Lightweight column grid overlay for the browser. Same columns, gutter, and margin as your Figma layout grid. Toggle it while you build.",
   "type": "module",
   "main": "./index.js",
   "module": "./index.js",
@@ -20,6 +20,10 @@
     "columns",
     "design"
   ],
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -31,5 +35,9 @@
   "homepage": "https://github.com/francescophra/folie#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "jsdom": "^29.0.1",
+    "vitest": "^4.1.0"
   }
 }
