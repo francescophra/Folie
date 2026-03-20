@@ -235,12 +235,12 @@ describe('rows', () => {
   })
 
   it('{rows: 4} renders 4 .fl-row divs', () => {
-    folie = new Folie({columns: 4, rows: 4, rowGutter: '10px', rowMargin: '10px'}).mount()
+    folie = new Folie({columns: 4, rows: 4, rowsGutter: '10px', rowsMargin: '10px'}).mount()
     expect(document.querySelectorAll('.fl-row').length).toBe(4)
   })
 
   it('sets --fl-rows, --fl-row-gutter, --fl-row-margin correctly', () => {
-    folie = new Folie({columns: 4, rows: 6, rowGutter: '16px', rowMargin: '24px'}).mount()
+    folie = new Folie({columns: 4, rows: 6, rowsGutter: '16px', rowsMargin: '24px'}).mount()
     const rw = document.querySelector('.fl-row-wrapper')
     expect(rw.style.getPropertyValue('--fl-rows')).toBe('6')
     expect(rw.style.getPropertyValue('--fl-row-gutter')).toBe('16px')
@@ -248,15 +248,15 @@ describe('rows', () => {
   })
 
   it('sets --fl-row-color and --fl-row-opacity correctly', () => {
-    folie = new Folie({columns: 4, rows: 4, rowGutter: '10px', rowMargin: '10px', rowColor: '#0000ff', rowOpacity: 0.05}).mount()
+    folie = new Folie({columns: 4, rows: 4, rowsGutter: '10px', rowsMargin: '10px', rowColor: '#0000ff', rowOpacity: 0.05}).mount()
     const rw = document.querySelector('.fl-row-wrapper')
     expect(rw.style.getPropertyValue('--fl-row-color')).toBe('#0000ff')
     expect(rw.style.getPropertyValue('--fl-row-opacity')).toBe('0.05')
   })
 
-  it('partial breakpoint inherits rowGutter and rowMargin from base', () => {
+  it('partial breakpoint inherits rowsGutter and rowsMargin from base', () => {
     folie = new Folie({
-      columns: 4, rows: 6, rowGutter: '10px', rowMargin: '20px',
+      columns: 4, rows: 6, rowsGutter: '10px', rowsMargin: '20px',
       breakpoints: {1024: {rows: 10}},
     }).mount()
     const rw = document.querySelector('.fl-row-wrapper')

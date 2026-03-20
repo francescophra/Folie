@@ -48,7 +48,7 @@ class Folie {
   private ac: AbortController | null = null
 
   constructor(opts: FolieOptions = {}) {
-    const {columns, gutter, margin, rows, rowGutter, rowMargin, rowColor, rowOpacity, breakpoints, ...rest} = opts
+    const {columns, gutter, margin, rows, rowsGutter, rowsMargin, rowColor, rowOpacity, breakpoints, ...rest} = opts
 
     const hasShorthand = columns !== undefined || gutter !== undefined || margin !== undefined
     const hasBreakpoints = breakpoints !== undefined && Object.keys(breakpoints).length > 0
@@ -85,8 +85,8 @@ class Folie {
     }
 
     if (rows !== undefined) resolvedBase.rows = rows
-    if (rowGutter !== undefined) resolvedBase.rowGutter = rowGutter
-    if (rowMargin !== undefined) resolvedBase.rowMargin = rowMargin
+    if (rowsGutter !== undefined) resolvedBase.rowsGutter = rowsGutter
+    if (rowsMargin !== undefined) resolvedBase.rowsMargin = rowsMargin
 
     const mode = rest.mode ?? 'fill'
     const opacity = rest.opacity ?? (mode === 'outline' ? 0.5 : DEFAULTS.opacity)
@@ -292,8 +292,8 @@ class Folie {
     if (this.rowWrapper && cfg.rows !== undefined) {
       const rs = this.rowWrapper.style
       rs.setProperty('--fl-rows', String(cfg.rows))
-      rs.setProperty('--fl-row-gutter', cfg.rowGutter as string)
-      rs.setProperty('--fl-row-margin', cfg.rowMargin as string)
+      rs.setProperty('--fl-row-gutter', cfg.rowsGutter as string)
+      rs.setProperty('--fl-row-margin', cfg.rowsMargin as string)
       rs.setProperty('--fl-row-color', this.options.rowColor)
       rs.setProperty('--fl-row-opacity', String(this.options.rowOpacity))
 
