@@ -169,10 +169,7 @@
       </div>
 
       <div class="modes">
-        <button class="active" data-rows="off">
-          <span class="btn-name">No rows</span>
-        </button>
-        <button data-rows="on">
+        <button id="rows-toggle">
           <span class="btn-name">Rows</span>
         </button>
       </div>
@@ -240,14 +237,11 @@
         });
       });
 
-      document.querySelectorAll("[data-rows]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          document.querySelectorAll("[data-rows]").forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          currentRows = btn.dataset.rows === "on";
-          const activePreset = document.querySelector(".presets button.active");
-          build(activePreset.dataset.cols, activePreset.dataset.gutter);
-        });
+      document.getElementById("rows-toggle").addEventListener("click", () => {
+        currentRows = !currentRows;
+        document.getElementById("rows-toggle").classList.toggle("active", currentRows);
+        const activePreset = document.querySelector(".presets button.active");
+        build(activePreset.dataset.cols, activePreset.dataset.gutter);
       });
     </script>
   </body>
