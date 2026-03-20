@@ -1,5 +1,5 @@
 import {beforeEach, afterEach, describe, it, expect} from 'vitest'
-import {Folie} from '../index.js'
+import Folie from '../index.js'
 
 let folie
 

@@ -21,8 +21,9 @@
     "design"
   ],
   "scripts": {
-    "test": "vitest",
-    "test:run": "vitest run"
+    "dev": "vite",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "license": "MIT",
   "repository": {
