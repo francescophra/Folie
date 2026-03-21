@@ -20,8 +20,6 @@ yarn add folie-grid
 
 ## Usage
 
-The package ships TypeScript declarations. No `@types/` package needed.
-
 ### Minimal — built-in defaults
 
 ```js
@@ -81,29 +79,6 @@ new Folie({
     1024: {columns: 12, rows: 10},
   },
 }).mount();
-```
-
-### TypeScript
-
-```ts
-import Folie, { type FolieOptions, type BreakpointConfig, type Color } from "folie-grid";
-
-const config: FolieOptions = {
-  columns: 12,
-  gutter: "20px",
-  margin: "clamp(16px, 5vw, 80px)",
-  breakpoints: {
-    768:  { columns: 8 } satisfies BreakpointConfig,
-    1280: { columns: 12, gutter: "30px" },
-  },
-};
-
-const grid = new Folie(config).mount();
-
-// destroy on HMR teardown
-if (import.meta.hot) {
-  import.meta.hot.dispose(() => grid.destroy());
-}
 ```
 
 ## Options
@@ -194,6 +169,52 @@ Default: `Ctrl+G`. Toggle visibility. Customise via the `shortcut` option:
 
 ```js
 new Folie({shortcut: "ctrl+shift+g"});
+```
+
+## TypeScript
+
+The package ships type declarations — no `@types/` package needed.
+
+The import works exactly like JavaScript:
+
+```ts
+import Folie from "folie-grid";
+
+const grid = new Folie({
+  columns: 12,
+  gutter: "20px",
+  margin: "clamp(16px, 5vw, 80px)",
+}).mount();
+```
+
+If you want to define the config object separately, you can import the `FolieOptions` type:
+
+```ts
+import Folie, { type FolieOptions } from "folie-grid";
+
+const config: FolieOptions = {
+  columns: 12,
+  gutter: "20px",
+  margin: "20px",
+  breakpoints: {
+    768:  { columns: 8 },
+    1280: { columns: 12, gutter: "30px" },
+  },
+};
+
+new Folie(config).mount();
+```
+
+### HMR teardown (Vite / Nuxt / SvelteKit)
+
+Call `destroy()` on hot reload to prevent the overlay from duplicating:
+
+```ts
+const grid = new Folie({ columns: 12 }).mount();
+
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => grid.destroy());
+}
 ```
 
 ## License
