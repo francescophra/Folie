@@ -49,7 +49,7 @@ Use numeric min-width keys. Top-level `columns`/`gutter`/`margin` becomes the ba
 new Folie({
   columns: 6, gutter: "10px", margin: "20px", // base: 0px+
   breakpoints: {
-    768:  {columns: 8},                              // gutter/margin inherited
+    768:  {columns: 8}, // gutter/margin inherited
     1024: {columns: 12, gutter: "20px", margin: "20px"},
   },
 }).mount();
